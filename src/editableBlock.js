@@ -32,7 +32,7 @@ class EditableBlock extends React.Component {
 
   render() {
     return (
-      <ContentEditable
+      <ContentEditableㄴ
         className="Block"
         innerRef={this.contentEditable}
         html={this.state.html}
