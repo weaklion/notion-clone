@@ -1,17 +1,21 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
 
+import EditablePage from "./editablePage";
+
+const rootElement = document.getElementById("root");
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <h1 className="Logo">notion.clone</h1>
+    <p className="Intro">
+      Hello{" "}
+      <span role="img" aria-label="greetings" className="Emoji">
+        👋
+      </span>{" "}
+      You can add content below. Type <span className="Code">/</span> to see
+      available elements.
+    </p>
+    <EditablePage />
   </React.StrictMode>,
-  document.getElementById('root')
+  rootElement
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
