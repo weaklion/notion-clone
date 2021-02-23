@@ -70,12 +70,14 @@ class SelectMenu extends React.Component {
       case "ArrowUp" :
         e.preventDefault();
         const prevSelected = selected === 0 ? items.length - 1 : selected - 1;
+        console.log(prevSelected);
         this.setState({ selectedItem : prevSelected });
         break;
       case "ArrowDown" :
       case "Tab" :
         e.preventDefault();
-        const nextSelected = selected === items.length - 1 ? 0 : selected -1;
+        const nextSelected = selected === items.length - 1 ? 0 : selected + 1  ;
+        console.log(nextSelected);
         this.setState({ selectedItem : nextSelected });
         break;
       default : 
