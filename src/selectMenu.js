@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect} from "react";
 import { matchSorter } from "match-sorter";
 
 
@@ -26,93 +26,76 @@ const allowedTags = [
   }
 ]; // '/' 클릭시 html
 
-class SelectMenu extends React.Component {
-  constructor(props) {
-    super(props);
-    this.keyDownHandler = this.keyDownHandler.bind(this);
-    this.state = {
-      command : "",
-      items : allowedTags,
-      selectedItem : 0
+const SelectMenu = (props) => {
+
+  const X = props.position.x;
+  const Y = props.position.y - MENU_HEIGHT ;
+  const positionAttributes = { top : Y, left : X };
+
+  const [command, setCommand] = useState("");
+  const [items,  setItems] = useState(allowedTags);
+  const [selectedItem, setSelectedItem] = useState(0);
+
+
+  useEffect(() => {
+    function keyDownHandler(e) {
+      switch(e.key) {
+        case "Enter" :
+          e.preventDefault();
+          props.onSelect(items[selectedItem].tag);
+          break;
+        case "Backspace" :
+          if (!command) props.close();
+          setCommand( command.substring(0, command.length -1));
+          break;
+        case "ArrowUp" :
+          e.preventDefault();
+          const prevSelected = selectedItem === 0 ? items.length -1 : selectedItem - 1;
+          setSelectedItem(prevSelected);
+          break;
+        case "ArrowDown" :
+        case "Tab" :
+          e.preventDefault();
+          const nextSelected = selectedItem === items.length - 1 ? 0 : selectedItem + 1;
+          setSelectedItem(nextSelected);
+          break;
+        default : 
+          setCommand(command + e.key);
+          break;
+      }
+    }
+
+    document.addEventListener("keydown", keyDownHandler);
+    return () => {
+      document.removeEventListener("keydown", keyDownHandler);
     };
-  }
+  });
 
-  componentDidMount() {
-    document.addEventListener("keydown", this.keyDownHandler);
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    const command = this.state.command;
-    if (prevState.command !== command) {
-      const items = matchSorter(allowedTags, command, { keys : ["tags"]} );
-      this.setState({ items : items })
-    }
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener("keydown", this.keyDownHandler);
-  }
-
-  keyDownHandler(e) {
-    const items = this.state.items;
-    const selected  =this.state.selectedItem;
-    const command = this.state.command;
-
-    switch(e.key) {
-      case "Enter" :
-        e.preventDefault();
-        this.props.onSelect(items[selected].tag);
-        break;
-      case "Backspace" :
-        if (!command) this.props.close();
-        this.setState({ command : command.substring(0, command.length - 1)});
-        break;
-      case "ArrowUp" :
-        e.preventDefault();
-        const prevSelected = selected === 0 ? items.length - 1 : selected - 1;
-        console.log(prevSelected);
-        this.setState({ selectedItem : prevSelected });
-        break;
-      case "ArrowDown" :
-      case "Tab" :
-        e.preventDefault();
-        const nextSelected = selected === items.length - 1 ? 0 : selected + 1  ;
-        console.log(nextSelected);
-        this.setState({ selectedItem : nextSelected });
-        break;
-      default : 
-        this.setState({ command : this.state.command + e.key })
-        break;
-    }
-  }
-
-  render() {
-    const x = this.props.position.x;
-    const y = this.props.position.y - MENU_HEIGHT;
-    const positionAttributes = {top : y, left : x };
-
-    return (
-      <div className="SelectMenu" style={positionAttributes}>
-        <div className="Items">
-          {this.state.items.map((item, key) => {
-            const selectedItem = this.state.selectedItem;
-            const isSelected = this.state.items.indexOf(item) === selectedItem;
-            return (
-              <div
-                className={isSelected ? "Selected" : null}
-                key={key}
-                role="button"
-                tabIndex="0"
-                onClick={() => this.props.onSelect(item.tag)}
-              >
-                {item.label}
-              </div>
-            )
-          })}
-        </div>
+  useEffect(() => {
+    const items = matchSorter(allowedTags, command, { keys : ["tag"]});
+    setItems(items);
+  },[command])
+  
+  return (
+    <div className="SelectMenu" style={positionAttributes}>
+      <div className="Items">
+        {items.map((item, key) => {
+          const isSelected = items.indexOf(item) === selectedItem;
+          return (
+            <div
+              className={isSelected ? "Selected" : null}
+              key={key}
+              role="button"
+              tabIndex="0"
+              onClick={() => props.onSelect(item.tag)}
+            >
+              {item.label}
+            </div>
+          )
+        })}
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default SelectMenu;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect} from "react";
 import ContentEditable from "react-contenteditable";
 
 import SelectMenu from "./selectMenu";
@@ -130,5 +130,24 @@ class EditableBlock extends React.Component {
     );
   }
 }
+
+// const EditableBlock = (props) => {
+
+//   const [htmlBackup, setHtmlBackUp] = useState();
+//   const [html, setHtml] = useState("");
+//   const [tag, setTag] = useState("p");
+//   const [previousKey, setPreviousKey] = useState("");
+//   const [selectMenuIsOpen, setSelectMenuIsOpen] = useState(false),
+//   const [selectMenuPosition, setSelectMenuPosition] = useState({ x : null, y : null})
+  
+//   useEffect(() => {
+//     setHtml(props.html);
+//     setTag(props.tag);
+//   });
+
+//   useEf
+
+// }
+
 
 export default EditableBlock;
