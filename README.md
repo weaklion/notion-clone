@@ -16,9 +16,9 @@ You will also see any lint errors in the console.
 
 ### reference
 
-https://medium.com/swlh/how-to-build-a-text-editor-like-notion-c510aedfdfcc
+https://medium.com/swlh/how-to-build-a-text-editor-like-notion-c510aedfdfcc \
 notion-clone
 
-http://ezcode.kr/study/view/224
+http://ezcode.kr/study/view/224 \
 Selection,Range
 
