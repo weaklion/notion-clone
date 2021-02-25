@@ -33,7 +33,7 @@ const allowedTags = [
 const SelectMenu = (props) => {
 
   const X = props.position.x;
-  const Y = props.position.y - MENU_HEIGHT ;
+  const Y = props.position.y  + MENU_HEIGHT;
   const positionAttributes = { top : Y, left : X };
 
   const [command, setCommand] = useState("");
@@ -96,7 +96,9 @@ const SelectMenu = (props) => {
               <p class="Label">
                 {item.label}
               </p>
-              {item.desc}
+              <div class="Desc">
+                {item.desc}
+              </div>
             </div>
           )
         })}
