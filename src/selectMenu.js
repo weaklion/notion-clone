@@ -7,22 +7,26 @@ const allowedTags = [
   {
     id: "page-title",
     tag: "h1",
-    label: "Page Title"
+    label: "Heading 1",
+    desc : "Big section heading."
   },
   {
     id: "heading",
     tag: "h2",
-    label: "Heading"
+    label: "Heading 2",
+    desc : "Medium section heading"
   },
   {
     id: "subheading",
     tag: "h3",
-    label: "Subheading"
+    label: "Heading 3",
+    desc : "Small section heading"
   },
   {
     id: "paragraph",
     tag: "p",
-    label: "Paragraph"
+    label: "Paragraph",
+    desc : "paragraph"
   }
 ]; // '/' 클릭시 html
 
@@ -89,7 +93,10 @@ const SelectMenu = (props) => {
               tabIndex="0"
               onClick={() => props.onSelect(item.tag)}
             >
-              {item.label}
+              <p class="Label">
+                {item.label}
+              </p>
+              {item.desc}
             </div>
           )
         })}

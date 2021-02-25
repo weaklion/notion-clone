@@ -32,6 +32,10 @@ body {
   padding-right: 0.5rem;
 }
 
+.Label {
+  font-weight: bold;
+}
+
 /* EDITABLE BLOCK*/
 
 .Block {

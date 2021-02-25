@@ -28,7 +28,6 @@ class EditablePage extends React.Component {
   }
 
   addBlockHandler(currentBlock) {
-    console.log(currentBlock,'add')
     const newBlock = { id : uid(), html: "", tag: "p"};
     const blocks = this.state.blocks;
     const index = blocks.map((b) => b.id).indexOf(currentBlock.id);
