@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef} from "react";
+import React from "react";
 import ContentEditable from "react-contenteditable";
 
 import SelectMenu from "./selectMenu";
@@ -119,6 +119,9 @@ class EditableBlock extends React.Component {
             close={this.closeSelectMenuHandler}
           />
         )} 
+        <span>
+          +
+        </span>
         <ContentEditable //라이브러리가 hook을 지원하지 않음
           className="Block"
           innerRef={this.contentEditable}
@@ -127,6 +130,7 @@ class EditableBlock extends React.Component {
           onChange={this.onChangeHandler}
           onKeyDown={this.onKeyDownHandler}
           onKeyUp={this.onKeyUpHandler}
+          placeholder={"Type '/' for commands"}
         />
       </>
     );

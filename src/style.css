@@ -110,3 +110,9 @@ body {
   background: #f5f6fb;
   border-radius: 0.5rem;
 }
+
+[contenteditable=true]:empty:before {
+  content : attr(placeholder) ;
+  display : block;
+  color : #aaa;
+}
